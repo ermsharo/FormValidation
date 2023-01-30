@@ -12,6 +12,10 @@ import { Typography } from "@mui/material";
 interface Props {}
 
 
+
+const getFormatedDate = (currentDate: string) => {
+  return currentDate.split('/').reverse().join('-');
+ }
 const Form = (props: Props) => {
   const formik = useFormik({
     initialValues: {
@@ -38,20 +42,22 @@ const Form = (props: Props) => {
         .required("O campo é obrigatório."),
       date: yup
         .date()
+        .min(getFormatedDate('01/01/1900'))
         .required("O campo é obrigatório.")
-
     }),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
     },
   });
 
+
+
   return (
 
     <Container maxWidth="sm">
 
 
-    <form>
+    <form onSubmit={formik.handleSubmit}>
 
 <Stack sx={{ width: '100%' }} spacing={2}>
 <Typography variant="h2" >
@@ -112,7 +118,7 @@ const Form = (props: Props) => {
     <Alert severity="error">{formik.errors.date}</Alert>
   ) : null}
 
-  <Button type="submit" variant="contained">Enviar</Button>
+  <Button   type="submit" variant="contained">Enviar</Button>
   
 
  
