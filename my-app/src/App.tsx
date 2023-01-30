@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import { useFormik } from "formik";
-
+import TextField from '@mui/material/TextField';
 function App() {
 
   let schema = yup.object().shape({
@@ -38,7 +38,8 @@ function App() {
     <div className="App">
     <form onSubmit={formik.handleSubmit}>
       <label htmlFor="nome">Nome</label>
-      <input
+      <TextField
+      label = "nome"
         id="nome"
         name="nome"
         type="text"
